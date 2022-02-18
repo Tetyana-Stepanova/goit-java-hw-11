@@ -13,13 +13,13 @@ public class FizzBuzzNew {
     public static void main(String[] args) {
 
         ProcessThread fizzBuzz = new ProcessThread((n) -> {
-            Integer k = null;
+            Integer k;
             try {
                 k = Integer.valueOf(n);
             } catch (Exception ex) {
                 return n;
             }
-            if (k != null && k % 15 == 0) {
+            if (k % 15 == 0) {
                 return "FizzBuzz";
             } else {
                 return n;
@@ -27,13 +27,13 @@ public class FizzBuzzNew {
         });
 
         ProcessThread fizz = new ProcessThread((n) -> {
-            Integer k = null;
+            Integer k;
             try {
                 k = Integer.valueOf(n);
             } catch (Exception ex) {
                 return n;
             }
-            if (k != null & k % 3 == 0 & k % 5 != 0) {
+            if (k % 3 == 0 & k % 5 != 0) {
                 return "Fizz";
             } else {
                 return n;
@@ -41,32 +41,20 @@ public class FizzBuzzNew {
         });
 
         ProcessThread buzz = new ProcessThread((n) -> {
-            Integer k = null;
+            Integer k;
             try {
                 k = Integer.valueOf(n);
             } catch (Exception ex) {
                 return n;
             }
-            if (k != null & k % 5 == 0 & k % 3 != 0) {
+            if (k % 5 == 0 & k % 3 != 0) {
                 return "Buzz";
             } else {
                 return n;
             }
         });
 
-        ProcessThread number = new ProcessThread((n) -> {
-            Integer k = null;
-            try {
-                k = Integer.valueOf(n);
-            } catch (Exception ex) {
-                return n;
-            }
-            if (k != null & k % 3 != 0 & k % 5 != 0) {
-                return n;
-            } else {
-                return n;
-            }
-        });
+        ProcessThread number = new ProcessThread((n) -> n);
 
         List<ProcessThread> threads = new ArrayList<>();
         threads.add(fizzBuzz);
