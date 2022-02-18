@@ -1,8 +1,8 @@
 public class Threads {
     public static void main (String [] args) throws InterruptedException{
         Chronometer start=new Chronometer();
-        Messenger t1=new Messenger(5, start);
-        Messenger t2=new Messenger(1, start);
+        Messenger t1=new Messenger( start);
+        Messenger t2=new Messenger( start);
         t1.countTime=10;
         t1.isEverySecond=true;
         t2.countTime=10;
@@ -32,14 +32,12 @@ class Chronometer {
     }
 }
 class Messenger implements Runnable{
-    private int time;
-    public Chronometer ch;
+    public final Chronometer ch;
     public static boolean finish=false;
     public boolean flag=true;
     public int countTime;
     public boolean isEverySecond;
-    Messenger(int time, Chronometer ch) {
-        this.time=time;
+    Messenger(Chronometer ch) {
         this.ch=ch;
     }
 
@@ -47,7 +45,7 @@ class Messenger implements Runnable{
        while (true) {
            synchronized (ch) {
                try {
-                   if (isEverySecond && ch.time % 1 == 0)
+                   if (isEverySecond)
                        System.out.println("Thread at intervals 1");
                    if(!isEverySecond && ch.time % 5 ==0)
                        System.out.println("5 seconds have passed");
